@@ -9,8 +9,8 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<AppProvider />}>
           <Route index element={<Home />} />
-          <Route path="onboarding" element={<Onboarding />} />
-          <Route path="settings" element={<Settings />} />
+          {/* <Route path="onboarding" element={<Onboarding />} /> */}
+          {/* <Route path="settings" element={<Settings />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>

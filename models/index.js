@@ -20,6 +20,14 @@ if (config.use_env_variable) {
   );
 }
 
+sequelize.authenticate()
+.then(()=>{
+  console.log('CONNECTED MAN')
+})
+.catch(err=>{
+  console.log('FUCK IT: ' + err)
+})
+
 fs.readdirSync(__dirname)
   .filter((file) => {
     return (

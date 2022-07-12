@@ -80,6 +80,7 @@ const Onboarding = () => {
             : 'disabled'
         }
       />
+      ONBOARDING
     </OnboardingPage>
   );
 };

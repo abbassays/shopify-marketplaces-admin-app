@@ -45,22 +45,50 @@ async function startServer() {
     bodyParser: true,
     context: async (ctx) => {
       const authHeader = ctx.req.headers.authorization;
+
+      console.log('HERE YESSS ',authHeader);
+      
       const matches = authHeader?.match(/Bearer (.*)/);
       let shop;
+      let includeExpired;
       if (matches) {
+        // understand this entire shit
+
+        console.log('TOKEN MATCHED')
+
+        // decode session token
         const payload = Shopify.Utils.decodeSessionToken(matches[1]);
+
+        // remove https from shop url
         shop = payload.dest.replace('https://', '');
+        console.log('Shop LINK: ',shop)
       }
+
       if (shop) {
+        console.log('SHOP YES')
+
+        // get session
         const session = await Shopify.Utils.loadOfflineSession(shop);
+        // returned undefined
+
+        console.log('Session is')
+        console.log(session)
+
+
+
         if (session) {
+          console.log('SESSION YES')
           return {shop: {domain: shop, accessToken: session.accessToken}};
         }
       }
-
+      
+      console.log('NOTHING FUCK OFF')
       return {};
     },
   });
+
+
+  
   await graphQLServer.start();
 
   graphQLServer.applyMiddleware({
@@ -149,9 +177,10 @@ async function startServer() {
     if (err) {
       return console.error(err);
     }
-
     console.log('Listening at http://localhost:' + process.env.PORT || 3000);
   });
 }
 
 startServer();
+
+

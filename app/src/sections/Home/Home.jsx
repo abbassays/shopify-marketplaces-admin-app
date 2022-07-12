@@ -19,6 +19,9 @@ const HOME_PAGE_QUERY = gql`
 
 const Home = () => {
   const {data, loading} = useQuery(HOME_PAGE_QUERY);
+
+  console.log('LOADING: ',loading)
+
   if (loading) {
     return (
       <SkeletonPage>
@@ -28,6 +31,8 @@ const Home = () => {
       </SkeletonPage>
     );
   }
+
+  console.log('DATA AFTER LOADING: ',data)
 
   const {
     adminShop: {
@@ -39,6 +44,8 @@ const Home = () => {
       onboardingCompleted,
     },
   } = data;
+
+console.log('DATA BEFORE ONBARDING: ',data)
 
   if (onboardingCompleted) {
     return (
